@@ -9,6 +9,16 @@ import Register from './components/auth/Register';
 // Provider在根组件外层包了一层,这样App的所有子组件就默认都可以拿到state了
 import { Provider } from 'react-redux';
 import store from './store';
+import setAuthToken from './utils/setAuthToken';
+import jwt_decode from 'jwt-decode';
+import { setCurrentUser } from './actions/authActions';
+
+if (localStorage.jwtToken) {
+	setAuthToken(localStorage.jwtToken);
+	// 解析token
+	const decoded = jwt_decode(localStorage.jwtToken);
+	store.dispatch(setCurrentUser(decoded));
+}
 
 class App extends Component {
 	render() {

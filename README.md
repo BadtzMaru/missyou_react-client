@@ -30,3 +30,7 @@
 3. `import { Provider } from 'react-redux';`
 4. `<Provider store={store}>...</Provider>`
 5. `import { combineReducers } from 'redux';`
+
+# 解析 token
+
+`npm install jwt-decode`

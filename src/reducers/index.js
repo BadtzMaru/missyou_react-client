@@ -1,7 +1,9 @@
 // combineReducers 将多个reducer合成一个大的reducer
 import { combineReducers } from 'redux';
-import autReducer from './autReducer';
+import authReducer from './authReducer';
+import errorReducer from './errorReducer';
 
 export default combineReducers({
-	auth: autReducer,
+	auth: authReducer,
+	errors: errorReducer,
 });
