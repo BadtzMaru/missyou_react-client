@@ -11,13 +11,20 @@ import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-import { setCurrentUser } from './actions/authActions';
+import { setCurrentUser, logoutUser } from './actions/authActions';
+import Dashboard from './components/dashboard/Dashboard';
 
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
 	// 解析token
 	const decoded = jwt_decode(localStorage.jwtToken);
 	store.dispatch(setCurrentUser(decoded));
+	// 检测token是否过期
+	const currentTime = Date.now() / 1000;
+	if (decoded.exp < currentTime) {
+		store.dispatch(logoutUser());
+		window.location.href = '/login';
+	}
 }
 
 class App extends Component {
@@ -33,6 +40,11 @@ class App extends Component {
 							<Route
 								path='/register'
 								component={Register}
+								exact
+							/>
+							<Route
+								path='/dashboard'
+								component={Dashboard}
 								exact
 							/>
 						</div>

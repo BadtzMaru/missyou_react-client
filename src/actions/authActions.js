@@ -40,6 +40,16 @@ export const loginUser = (userData) => (dispatch) => {
 		});
 };
 
+// 退出
+export const logoutUser = () => (dispatch) => {
+	// 删除localStorage
+	localStorage.removeItem('jwtToken');
+	// 干掉请求头
+	setAuthToken(false);
+	// 连接reducer
+	dispatch(setCurrentUser({}));
+};
+
 export const setCurrentUser = (decoded) => {
 	return {
 		type: SET_CURRENT_USER,
