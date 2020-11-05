@@ -5,6 +5,7 @@ import {
 	CLEAR_CURRENT_PROFILE,
 	GET_ERRORS,
 	SET_CURRENT_USER,
+	GET_PROFILES,
 } from './types';
 
 const setProfileLoading = () => {
@@ -99,6 +100,56 @@ export const addEducation = (eduData, history) => (dispatch) => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
+			});
+		});
+};
+
+// 删除个人履历
+export const deleteExperience = (id) => (dispatch) => {
+	axios
+		.delete(`/api/profile/experience?exp_id=${id}`)
+		.then((res) => {
+			dispatch({
+				type: GET_PROFILE,
+				payload: res.data,
+			});
+		})
+		.catch((err) => {
+			console.log(err.response.data);
+		});
+};
+
+// 删除教育经历
+export const deleteEducation = (id) => (dispatch) => {
+	axios
+		.delete(`/api/profile/education?edu_id=${id}`)
+		.then((res) => {
+			dispatch({
+				type: GET_PROFILE,
+				payload: res.data,
+			});
+		})
+		.catch((err) => {
+			console.log(err.response.data);
+		});
+};
+
+// 获取所有人员信息
+export const getProfiles = () => (dispatch) => {
+	// 加载动画
+	dispatch(setProfileLoading());
+	axios
+		.get('/api/profile/all')
+		.then((res) => {
+			dispatch({
+				type: GET_PROFILES,
+				payload: res.data,
+			});
+		})
+		.catch(() => {
+			dispatch({
+				type: GET_PROFILES,
+				payload: null,
 			});
 		});
 };

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Spinner from '../../common/Spinner';
 import { Link } from 'react-router-dom';
 import ProfileActive from './ProfileActive';
+import Experience from './Experience';
+import Education from './Education';
 
 class Dashboard extends Component {
 	componentDidMount() {
@@ -36,6 +38,8 @@ class Dashboard extends Component {
 						</p>
 						<ProfileActive />
 						{/* 教育经历 & 个人履历 */}
+						<Experience experience={profile.experience} />
+						<Education education={profile.education} />
 						{/* 删除按钮 */}
 						<div style={{ marginBottom: '60px' }}>
 							<button
