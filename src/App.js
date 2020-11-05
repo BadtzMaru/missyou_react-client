@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
@@ -15,6 +15,9 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './common/PrivateRoute';
 import CreateProfile from './components/create-profile/CreateProfile';
+import EditProfile from './components/edit-profile/EditProfile';
+import AddExperience from './components/add-credentials/AddExperience';
+import AddEducation from './components/add-credentials/AddEducation';
 
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
@@ -44,20 +47,31 @@ class App extends Component {
 								component={Register}
 								exact
 							/>
-							<Switch>
-								<PrivateRoute
-									exact
-									path='/dashboard'
-									component={Dashboard}
-								/>
-							</Switch>
-							<Switch>
-								<PrivateRoute
-									exact
-									path='/create-profile'
-									component={CreateProfile}
-								/>
-							</Switch>
+							<PrivateRoute
+								exact
+								path='/dashboard'
+								component={Dashboard}
+							/>
+							<PrivateRoute
+								exact
+								path='/create-profile'
+								component={CreateProfile}
+							/>
+							<PrivateRoute
+								exact
+								path='/edit-profile'
+								component={EditProfile}
+							/>
+							<PrivateRoute
+								exact
+								path='/add-experience'
+								component={AddExperience}
+							/>
+							<PrivateRoute
+								exact
+								path='/add-education'
+								component={AddEducation}
+							/>
 						</div>
 						<Footer />
 					</div>
