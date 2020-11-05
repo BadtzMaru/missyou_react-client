@@ -70,7 +70,7 @@ class Register extends Component {
 								<TextFieldGroup
 									type='email'
 									placeholder='邮箱地址'
-									name='name'
+									name='email'
 									value={this.state.email}
 									onChange={this.onChange}
 									error={errors.email}

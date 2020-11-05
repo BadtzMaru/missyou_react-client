@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
@@ -13,6 +13,8 @@ import setAuthToken from './utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './common/PrivateRoute';
+import CreateProfile from './components/create-profile/CreateProfile';
 
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
@@ -42,11 +44,20 @@ class App extends Component {
 								component={Register}
 								exact
 							/>
-							<Route
-								path='/dashboard'
-								component={Dashboard}
-								exact
-							/>
+							<Switch>
+								<PrivateRoute
+									exact
+									path='/dashboard'
+									component={Dashboard}
+								/>
+							</Switch>
+							<Switch>
+								<PrivateRoute
+									exact
+									path='/create-profile'
+									component={CreateProfile}
+								/>
+							</Switch>
 						</div>
 						<Footer />
 					</div>

@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { GET_PROFILE, PROFILE_LOADING } from './types';
+import {
+	GET_PROFILE,
+	PROFILE_LOADING,
+	CLEAR_CURRENT_PROFILE,
+	GET_ERRORS,
+} from './types';
 
 const setProfileLoading = () => {
 	return {
@@ -25,3 +30,20 @@ export const getCurrentProfile = () => (dispatch) => {
 			});
 		});
 };
+
+// 创建个人信息post数据
+export const createProfile = (profileData, history) => (dispatch) => {
+	axios
+		.post('/api/profile', profileData)
+		.then((res) => history.push('/dashboard'))
+		.catch((err) => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response.data,
+			});
+		});
+};
+
+export const clearCurrentProfile = () => ({
+	type: CLEAR_CURRENT_PROFILE,
+});
