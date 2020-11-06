@@ -3,6 +3,7 @@ import { getProfiles } from '../../actions/profileActions';
 import { connect } from 'react-redux';
 import Spinner from '../../common/Spinner';
 import PropTypes from 'prop-types';
+import ProfileItem from './ProfileItem';
 
 class Profiles extends Component {
 	// 获取数据
@@ -17,7 +18,9 @@ class Profiles extends Component {
 			profileItems = <Spinner />;
 		} else {
 			if (profiles.length > 0) {
-				profileItems = <h1>开发人员相关信息</h1>;
+				profileItems = profiles.map((profile) => (
+					<ProfileItem key={profile._id} profile={profile} />
+				));
 			} else {
 				profileItems = <h4>没有任何相关开发人员信息</h4>;
 			}

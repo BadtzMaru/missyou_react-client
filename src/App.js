@@ -19,6 +19,8 @@ import EditProfile from './components/edit-profile/EditProfile';
 import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
 
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
@@ -77,6 +79,16 @@ class App extends Component {
 								exact
 								path='/profiles'
 								component={Profiles}
+							/>
+							<Route
+								exact
+								path='/profile/:handle'
+								component={Profile}
+							/>
+							<PrivateRoute
+								exact
+								path='/feed'
+								component={Posts}
 							/>
 						</div>
 						<Footer />

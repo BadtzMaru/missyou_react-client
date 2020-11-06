@@ -153,3 +153,23 @@ export const getProfiles = () => (dispatch) => {
 			});
 		});
 };
+
+// 根据handle获取个人信息
+export const getProfileByHandle = (handle) => (dispatch) => {
+	// 加载动画
+	dispatch(setProfileLoading());
+	axios
+		.get(`/api/profile/handle?handle=${handle}`)
+		.then((res) => {
+			dispatch({
+				type: GET_PROFILE,
+				payload: res.data,
+			});
+		})
+		.catch(() => {
+			dispatch({
+				type: GET_PROFILE,
+				payload: null,
+			});
+		});
+};
