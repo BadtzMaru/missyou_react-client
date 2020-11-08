@@ -21,6 +21,7 @@ import AddEducation from './components/add-credentials/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
@@ -89,6 +90,11 @@ class App extends Component {
 								exact
 								path='/feed'
 								component={Posts}
+							/>
+							<PrivateRoute
+								exact
+								path='/post/:id'
+								component={Post}
 							/>
 						</div>
 						<Footer />

@@ -3,6 +3,7 @@ import {
 	GET_POSTS,
 	DELETE_POST,
 	POST_LOADING,
+	GET_POST,
 } from '../actions/types';
 
 const initialState = {
@@ -27,6 +28,19 @@ const postReducer = (state = initialState, action) => {
 			return {
 				...state,
 				posts: action.payload,
+				loading: false,
+			};
+		case DELETE_POST:
+			return {
+				...state,
+				posts: state.posts.filter(
+					(post) => post._id !== action.payload
+				),
+			};
+		case GET_POST:
+			return {
+				...state,
+				post: action.payload,
 				loading: false,
 			};
 		default:
